@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import { fileURLToPath, URL } from 'node:url'
 
 export default defineConfig({
+  base: process.env.GITHUB_PAGES === 'true' ? '/vision-dataset-toolkit/' : '/',
   plugins: [vue()],
   resolve: {
     alias: {
