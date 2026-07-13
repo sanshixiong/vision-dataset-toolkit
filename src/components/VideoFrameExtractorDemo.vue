@@ -6,9 +6,9 @@
     <div class="demo-area">
       <div class="upload-section">
         <input ref="fileInput" type="file" accept="video/mp4,video/*" @change="handleUpload" />
-        <el-button type="primary" @click="$refs.fileInput.click()">
+        <button class="native-button native-button--primary" type="button" @click="$refs.fileInput.click()">
           选择视频
-        </el-button>
+        </button>
         <span v-if="videoFile" class="file-info">
           已选择: {{ videoFile.name }}（{{ formatSize(videoFile.size) }}）
         </span>
@@ -76,15 +76,15 @@
       </div>
 
       <div class="action-section" v-if="videoUrl">
-        <el-button type="success" :loading="extracting" @click="extractFrames">
-          开始抽帧
-        </el-button>
-        <el-button :disabled="frames.length === 0" @click="downloadFrames">
+        <button class="native-button native-button--success" type="button" :disabled="extracting" @click="extractFrames">
+          {{ extracting ? '抽帧中...' : '开始抽帧' }}
+        </button>
+        <button class="native-button" type="button" :disabled="frames.length === 0" @click="downloadFrames">
           下载抽帧结果 (ZIP)
-        </el-button>
-        <el-button @click="reset">
+        </button>
+        <button class="native-button" type="button" @click="reset">
           重置
-        </el-button>
+        </button>
       </div>
 
       <div class="progress-section" v-if="extracting">

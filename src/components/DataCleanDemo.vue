@@ -6,9 +6,9 @@
     <div class="demo-area">
       <div class="upload-section">
         <input type="file" accept="image/*" multiple @change="handleUpload" ref="fileInput" />
-        <el-button type="primary" @click="$refs.fileInput.click()">
+        <button class="native-button native-button--primary" type="button" @click="$refs.fileInput.click()">
           选择图片（可多选）
-        </el-button>
+        </button>
         <span v-if="files.length > 0" class="file-count">
           已选择 {{ files.length }} 个文件
         </span>
@@ -17,21 +17,21 @@
       <div class="clean-options" v-if="files.length > 0">
         <div class="option-group">
           <label>去重相似度阈值: {{ similarityThreshold }}</label>
-          <el-slider v-model="similarityThreshold" :min="0.8" :max="1" :step="0.01" style="width: 200px;" />
+          <input v-model.number="similarityThreshold" class="native-range" type="range" min="0.8" max="1" step="0.01" />
         </div>
         <div class="option-group">
           <label>最大尺寸: {{ maxWidth }}x{{ maxHeight }}</label>
-          <el-slider v-model="maxWidth" :min="720" :max="3840" :step="120" style="width: 200px;" />
+          <input v-model.number="maxWidth" class="native-range" type="range" min="720" max="3840" step="120" />
         </div>
       </div>
 
       <div class="clean-actions" v-if="files.length > 0 && !processing">
-        <el-button type="success" @click="startClean">
+        <button class="native-button native-button--success" type="button" @click="startClean">
           开始清洗
-        </el-button>
-        <el-button @click="clearFiles">
+        </button>
+        <button class="native-button" type="button" @click="clearFiles">
           清空
-        </el-button>
+        </button>
       </div>
 
       <!-- 进度条 -->
@@ -83,9 +83,9 @@
         <div class="failed-files" v-if="results.duplicates.length > 0">
           <div class="failed-files__header">
             <h4>重复文件 ({{ results.duplicates.length }})</h4>
-            <el-button type="warning" size="small" @click="$emit('open-preview', 0)">
+            <button class="native-button native-button--warning native-button--small" type="button" @click="$emit('open-preview', 0)">
               预览重复项 ({{ duplicateTotal }})
-            </el-button>
+            </button>
           </div>
           <div class="file-list">
             <div v-for="(item, idx) in results.duplicates" :key="idx" class="file-item duplicate">
@@ -125,12 +125,12 @@
 
         <!-- 下载按钮 -->
         <div class="download-section" v-if="results.success.length > 0">
-          <el-button type="primary" @click="downloadImages">
+          <button class="native-button native-button--primary" type="button" @click="downloadImages">
             下载清洗后的图片 (ZIP)
-          </el-button>
-          <el-button @click="downloadReport">
+          </button>
+          <button class="native-button" type="button" @click="downloadReport">
             下载报告 (Markdown)
-          </el-button>
+          </button>
         </div>
       </div>
     </div>

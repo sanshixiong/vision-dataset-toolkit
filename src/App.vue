@@ -150,16 +150,115 @@ onUnmounted(() => {
 }
 
 button,
-el-button,
 [role="button"],
 [data-clickable="true"] {
   cursor: pointer;
 }
 
 button:disabled,
-el-button[disabled],
 [aria-disabled="true"] {
   cursor: not-allowed;
+}
+
+.native-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 8px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font: inherit;
+  line-height: 1.2;
+  transition: background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.native-button:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.42);
+}
+
+.native-button:disabled {
+  opacity: 0.55;
+}
+
+.native-button--primary {
+  border-color: rgba(0, 212, 255, 0.72);
+  background: #00a8cc;
+}
+
+.native-button--primary:hover:not(:disabled) {
+  background: #00bfe8;
+}
+
+.native-button--success {
+  border-color: rgba(0, 210, 136, 0.72);
+  background: #15965f;
+}
+
+.native-button--success:hover:not(:disabled) {
+  background: #18aa6c;
+}
+
+.native-button--warning {
+  border-color: rgba(255, 180, 64, 0.72);
+  background: #b87712;
+}
+
+.native-button--warning:hover:not(:disabled) {
+  background: #cf8615;
+}
+
+.native-button--small {
+  min-height: 28px;
+  padding: 5px 10px;
+  font-size: 0.9rem;
+}
+
+.native-input,
+.native-select {
+  min-height: 34px;
+  padding: 7px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.28);
+  color: #fff;
+  font: inherit;
+}
+
+.native-select option {
+  background: #16213e;
+  color: #fff;
+}
+
+.native-select--wide {
+  width: 160px;
+}
+
+.native-select--compact {
+  width: 100px;
+}
+
+.native-input--number {
+  width: 120px;
+}
+
+.native-range {
+  width: 200px;
+  accent-color: #00d4ff;
+}
+
+.native-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #ddd;
+}
+
+.native-checkbox input {
+  accent-color: #00d4ff;
 }
 
 .footer {

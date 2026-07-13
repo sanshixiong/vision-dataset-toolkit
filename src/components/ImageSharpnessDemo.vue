@@ -6,19 +6,20 @@
     <div class="demo-area">
       <div class="upload-section">
         <input ref="fileInput" type="file" accept="image/*" multiple @change="handleUpload" />
-        <el-button type="primary" @click="fileInput.click()">
+        <button class="native-button native-button--primary" type="button" @click="fileInput.click()">
           选择图片
-        </el-button>
-        <el-button
-          type="success"
+        </button>
+        <button
+          class="native-button native-button--success"
+          type="button"
           :disabled="files.length === 0 || analyzing"
           @click="handleAnalyzeClick"
         >
           {{ analyzing ? '分析中...' : '开始分析' }}
-        </el-button>
-        <el-button :disabled="analyzing || files.length === 0" @click="handleClearClick">
+        </button>
+        <button class="native-button" type="button" :disabled="analyzing || files.length === 0" @click="handleClearClick">
           清空
-        </el-button>
+        </button>
         <span v-if="files.length > 0" class="file-count">已选择 {{ files.length }} 张图片</span>
       </div>
 

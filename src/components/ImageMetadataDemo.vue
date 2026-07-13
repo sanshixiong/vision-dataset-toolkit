@@ -6,9 +6,9 @@
     <div class="demo-area">
       <div class="upload-section">
         <input type="file" accept="image/*" @change="handleUpload" ref="fileInput" />
-        <el-button type="primary" @click="$refs.fileInput.click()">
+        <button class="native-button native-button--primary" type="button" @click="$refs.fileInput.click()">
           选择图片
-        </el-button>
+        </button>
         <span v-if="selectedFile" class="file-name">{{ selectedFile.name }}</span>
       </div>
 

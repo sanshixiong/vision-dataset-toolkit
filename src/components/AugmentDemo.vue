@@ -7,9 +7,9 @@
       <!-- 上传区域 -->
       <div class="upload-section">
         <input type="file" accept="image/*" @change="handleUpload" ref="fileInput" />
-        <el-button type="primary" @click="$refs.fileInput.click()">
+        <button class="native-button native-button--primary" type="button" @click="$refs.fileInput.click()">
           选择图片
-        </el-button>
+        </button>
         <span v-if="imageSrc" class="file-info">
           已选择: {{ fileName }}
         </span>
@@ -20,49 +20,67 @@
         <div class="config-row">
           <div class="config-item">
             <label>增强策略</label>
-            <el-select v-model="strategy" style="width: 160px;">
-              <el-option value="auto" label="自动组合" />
-              <el-option value="illumination" label="光照变化" />
-              <el-option value="geometric" label="几何变换" />
-              <el-option value="hsv" label="颜色调整" />
-              <el-option value="weather" label="雨雾效果" />
-              <el-option value="blur" label="模糊效果" />
-              <el-option value="noise" label="背景噪声" />
-            </el-select>
+            <select v-model="strategy" class="native-select native-select--wide">
+              <option value="auto">自动组合</option>
+              <option value="illumination">光照变化</option>
+              <option value="geometric">几何变换</option>
+              <option value="hsv">颜色调整</option>
+              <option value="weather">雨雾效果</option>
+              <option value="blur">模糊效果</option>
+              <option value="noise">背景噪声</option>
+            </select>
           </div>
 
           <div class="config-item">
             <label>增强数量</label>
-            <el-input-number v-model="augmentCount" :min="1" :max="20" style="width: 120px;" />
+            <input v-model.number="augmentCount" class="native-input native-input--number" type="number" min="1" max="20" />
           </div>
 
           <div class="config-item">
             <label>输出格式</label>
-            <el-select v-model="outputFormat" style="width: 100px;">
-              <el-option value="jpeg" label="JPEG" />
-              <el-option value="png" label="PNG" />
-            </el-select>
+            <select v-model="outputFormat" class="native-select native-select--compact">
+              <option value="jpeg">JPEG</option>
+              <option value="png">PNG</option>
+            </select>
           </div>
         </div>
 
         <div class="config-row">
           <div class="config-item checkbox-item">
-            <el-checkbox v-model="enableIllumination" label="光照变化" />
+            <label class="native-checkbox">
+              <input v-model="enableIllumination" type="checkbox" />
+              <span>光照变化</span>
+            </label>
           </div>
           <div class="config-item checkbox-item">
-            <el-checkbox v-model="enableGeometric" label="几何变换" />
+            <label class="native-checkbox">
+              <input v-model="enableGeometric" type="checkbox" />
+              <span>几何变换</span>
+            </label>
           </div>
           <div class="config-item checkbox-item">
-            <el-checkbox v-model="enableHSV" label="颜色调整" />
+            <label class="native-checkbox">
+              <input v-model="enableHSV" type="checkbox" />
+              <span>颜色调整</span>
+            </label>
           </div>
           <div class="config-item checkbox-item">
-            <el-checkbox v-model="enableWeather" label="雨雾效果" />
+            <label class="native-checkbox">
+              <input v-model="enableWeather" type="checkbox" />
+              <span>雨雾效果</span>
+            </label>
           </div>
           <div class="config-item checkbox-item">
-            <el-checkbox v-model="enableBlur" label="模糊效果" />
+            <label class="native-checkbox">
+              <input v-model="enableBlur" type="checkbox" />
+              <span>模糊效果</span>
+            </label>
           </div>
           <div class="config-item checkbox-item">
-            <el-checkbox v-model="enableNoise" label="背景噪声" />
+            <label class="native-checkbox">
+              <input v-model="enableNoise" type="checkbox" />
+              <span>背景噪声</span>
+            </label>
           </div>
         </div>
       </div>
@@ -94,9 +112,9 @@
         <div class="batch-header">
           <h4>批量增强结果 ({{ batchResults.length }}张)</h4>
           <div class="batch-actions">
-            <el-button type="primary" size="small" @click="downloadAll">
+            <button class="native-button native-button--primary native-button--small" type="button" @click="downloadAll">
               下载全部 (ZIP)
-            </el-button>
+            </button>
           </div>
         </div>
         <div class="batch-grid">
@@ -115,15 +133,15 @@
 
       <!-- 操作按钮 -->
       <div class="action-section" v-if="imageSrc">
-        <el-button type="success" @click="generateSingle" :loading="generating">
-          预览单张
-        </el-button>
-        <el-button type="warning" @click="generateBatch" :loading="batchGenerating">
-          批量生成 {{ augmentCount }} 张
-        </el-button>
-        <el-button @click="reset">
+        <button class="native-button native-button--success" type="button" :disabled="generating" @click="generateSingle">
+          {{ generating ? '生成中...' : '预览单张' }}
+        </button>
+        <button class="native-button native-button--warning" type="button" :disabled="batchGenerating" @click="generateBatch">
+          {{ batchGenerating ? '生成中...' : `批量生成 ${augmentCount} 张` }}
+        </button>
+        <button class="native-button" type="button" @click="reset">
           重置
-        </el-button>
+        </button>
       </div>
 
       <!-- 进度显示 -->

@@ -5,9 +5,9 @@
 
     <div class="demo-area">
       <div class="upload-section">
-        <el-button type="primary" @click="initializePreprocessor" :loading="loading">
-          初始化预处理器
-        </el-button>
+        <button class="native-button native-button--primary" type="button" :disabled="loading" @click="initializePreprocessor">
+          {{ loading ? '初始化中...' : '初始化预处理器' }}
+        </button>
         <span v-if="loaded" class="success-text">预处理器已就绪</span>
       </div>
 
@@ -20,10 +20,10 @@
 
       <div class="upload-section" v-if="loaded">
         <input type="file" accept="image/*" @change="handleUpload" ref="fileInput" />
-        <el-button @click="$refs.fileInput.click()">选择图像</el-button>
-        <el-button type="warning" @click="runPreprocess" :disabled="!imagePreview">
+        <button class="native-button" type="button" @click="$refs.fileInput.click()">选择图像</button>
+        <button class="native-button native-button--warning" type="button" :disabled="!imagePreview" @click="runPreprocess">
           运行预处理
-        </el-button>
+        </button>
       </div>
 
       <div class="result-panel" v-if="preprocessResult">
