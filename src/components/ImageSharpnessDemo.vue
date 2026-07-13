@@ -6,19 +6,19 @@
     <div class="demo-area">
       <div class="upload-section">
         <input ref="fileInput" type="file" accept="image/*" multiple @change="handleUpload" />
-        <button class="sharpness-button sharpness-button--primary" @click="fileInput.click()">
+        <el-button type="primary" @click="fileInput.click()">
           选择图片
-        </button>
-        <button
-          class="sharpness-button sharpness-button--accent"
+        </el-button>
+        <el-button
+          type="success"
           :disabled="files.length === 0 || analyzing"
-          @click="analyzeImages"
+          @click="handleAnalyzeClick"
         >
           {{ analyzing ? '分析中...' : '开始分析' }}
-        </button>
-        <button class="sharpness-button" :disabled="analyzing || files.length === 0" @click="clearImages">
+        </el-button>
+        <el-button :disabled="analyzing || files.length === 0" @click="handleClearClick">
           清空
-        </button>
+        </el-button>
         <span v-if="files.length > 0" class="file-count">已选择 {{ files.length }} 张图片</span>
       </div>
 
@@ -154,6 +154,16 @@ const averageScore = computed(() => {
 
 const warningCount = computed(() => results.value.filter((item) => getDisplayLevel(item) === 'warning').length)
 const blurryCount = computed(() => results.value.filter((item) => getDisplayLevel(item) === 'danger').length)
+
+function handleAnalyzeClick() {
+  if (files.value.length === 0 || analyzing.value) return
+  analyzeImages()
+}
+
+function handleClearClick() {
+  if (files.value.length === 0 || analyzing.value) return
+  clearImages()
+}
 
 function handleUpload(event) {
   const uploadedFiles = Array.from(event.target.files || []).filter((file) => file.type.startsWith('image/'))
@@ -511,37 +521,6 @@ onUnmounted(() => {
 
 .upload-section input[type="file"] {
   display: none;
-}
-
-.sharpness-button {
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-  border-radius: 8px;
-  padding: 10px 18px;
-  cursor: pointer;
-  transition: border-color 0.2s, background 0.2s, transform 0.2s;
-}
-
-.sharpness-button:hover:not(:disabled) {
-  border-color: #00d4ff;
-  background: rgba(0, 212, 255, 0.12);
-  transform: translateY(-1px);
-}
-
-.sharpness-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.45;
-}
-
-.sharpness-button--primary {
-  border-color: rgba(0, 212, 255, 0.55);
-  background: rgba(0, 212, 255, 0.18);
-}
-
-.sharpness-button--accent {
-  border-color: rgba(34, 197, 94, 0.55);
-  background: rgba(34, 197, 94, 0.18);
 }
 
 .file-count,

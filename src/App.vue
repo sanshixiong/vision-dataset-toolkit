@@ -20,6 +20,7 @@
         />
         <ImageSharpnessDemo v-if="activeDemo === 'sharpness'" />
         <AugmentDemo v-if="activeDemo === 'augment'" />
+        <VideoFrameExtractorDemo v-if="activeDemo === 'video-frame'" />
       </section>
     </main>
 
@@ -49,6 +50,7 @@ import ImageMetadataDemo from './components/ImageMetadataDemo.vue'
 import DataCleanDemo from './components/DataCleanDemo.vue'
 import ImageSharpnessDemo from './components/ImageSharpnessDemo.vue'
 import AugmentDemo from './components/AugmentDemo.vue'
+import VideoFrameExtractorDemo from './components/VideoFrameExtractorDemo.vue'
 import DuplicatePreview from './components/DuplicatePreview.vue'
 
 // 演示场景
@@ -57,7 +59,8 @@ const demos = [
   { id: 'metadata', name: '图片元数据', icon: '🕒' },
   { id: 'clean', name: '数据清洗', icon: '🧹' },
   { id: 'sharpness', name: '清晰度分析', icon: '🔎' },
-  { id: 'augment', name: '样本增强', icon: '🔄' }
+  { id: 'augment', name: '样本增强', icon: '🔄' },
+  { id: 'video-frame', name: '视频抽帧', icon: '🎞️' }
 ]
 
 const activeDemo = ref('model')
@@ -144,6 +147,19 @@ onUnmounted(() => {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 16px;
   padding: 30px;
+}
+
+button,
+el-button,
+[role="button"],
+[data-clickable="true"] {
+  cursor: pointer;
+}
+
+button:disabled,
+el-button[disabled],
+[aria-disabled="true"] {
+  cursor: not-allowed;
 }
 
 .footer {
